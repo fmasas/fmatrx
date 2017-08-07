@@ -15,7 +15,7 @@ public class DBUtility {
 			return connection;
 		else {
 			try{
-				//Choose the driver 
+				//Choose the driver  
 				String driver = "com.mysql.jdbc.Driver";
 				//String url = "jdbc:mysql://167.114.152.77:3306/fma?autoReconnect=true";    //prod
 				String url = "jdbc:mysql://localhost:3306/fma?autoReconnect=true";  //desa
