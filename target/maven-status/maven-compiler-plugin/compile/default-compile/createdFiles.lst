@@ -1,12 +1,13 @@
 com\agn\model\Order.class
+com\agn\controller\OrderReportController.class
 com\agn\dao\OrderItemManagerService.class
 com\agn\service\OrderServiceImpl.class
 com\agn\service\OrderService.class
 com\agn\controller\IndexController.class
 com\agn\configuration\HelloWorldInitializer.class
 com\agn\dao\DBUtility.class
-com\agn\dao\OrderManagerService.class
 com\agn\service\OrderItemServiceImpl.class
+com\agn\dao\OrderManagerService.class
 com\agn\configuration\CORSFilter.class
 com\agn\controller\FmaTrxRestController.class
 com\agn\configuration\HelloWorldConfiguration.class

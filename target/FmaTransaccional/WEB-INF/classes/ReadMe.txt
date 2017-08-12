@@ -2,9 +2,13 @@ API Local: http://localhost:8080/FmaTransaccional2
 API Prod: http://167.114.152.77:8090/FmaTransaccional
 
 When start check on http://localhost:8080/FmaTransaccional2   
+When start prod check on http://167.114.152.77:8090/FmaTransaccional/ordenes
 
 Mapping ordenes
 http://localhost:8080/FmaTransaccional2/ordenes
+http://localhost:8080/FmaTransaccional2/reporteordenes
+
+http://localhost:8080/manager
 
 Ordenes
 -Inserting ok

@@ -8,6 +8,8 @@ Mapping ordenes
 http://localhost:8080/FmaTransaccional2/ordenes
 http://localhost:8080/FmaTransaccional2/reporteordenes
 
+http://localhost:8080/manager
+
 Ordenes
 -Inserting ok
 
