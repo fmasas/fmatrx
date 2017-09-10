@@ -3,7 +3,7 @@ App.controller('OrderController', ['$scope', '$location', 'OrderService', functi
           var self = this;
           self.order={id_order:null,clientname:'',order_date:'',deliver_date:'',order_total_value:'',order_status:''};
           self.orders=[];
-          self.cliente = ["Manuel Garcia", "Roberto Gomez", "Villapinzon", "Hector Segura", "Boyaca", "Alfonso Camargo", "Oswaldo Pava"];
+          self.cliente = ["Manuel Garcia", "Roberto Gomez", "Villapinzon", "Hector Segura", "Boyaca", "Alfonso Camargo", "Oswaldo Pava", "Nelson Vargas"];
           self.order_status = ["Sin iniciar", "En proceso", "Terminado", "Entregado"];
           self.material = ["Maleable Acero 10-20", "Manganeso", "Manganeso Duro", "Cromo"];
                
