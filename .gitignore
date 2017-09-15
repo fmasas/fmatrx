@@ -1,3 +1,5 @@
 # Ignore bin, classes, datafileexport, and temp folders
 /target
 /target/*
+target/
+target/*

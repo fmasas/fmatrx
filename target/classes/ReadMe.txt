@@ -20,7 +20,7 @@ Deploy on server
 0. Change api_service on angular service to prod
 1. Change parameters on dbutility for db connection
 2. Build a maven and make sure is build succesful 
-3. Export war to C:\Servers\apacheTomcat8\webapps\FmaTransaccional.war
+3. Export war to C:\Servers\apacheTomcat8\webapps\FmaTransaccional.war (Can also check the war on Building war: C:\Users\Usuario\workspace-smvc\FmaTransaccional\target\FmaTransaccional.war)
 4. Load war from previous site to /usr/local/apache-tomcat-8.0.36/webapps on server replacing previous war
 5. shutdown and startup tomcat 
 
