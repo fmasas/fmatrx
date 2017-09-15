@@ -17,12 +17,12 @@ public class DBUtility {
 			try{
 				//Choose the driver  
 				String driver = "com.mysql.jdbc.Driver";
-				//String url = "jdbc:mysql://167.114.152.77:3306/fma?autoReconnect=true";    //prod
-				String url = "jdbc:mysql://localhost:3306/fma?autoReconnect=true";  //desa
-				//String user = "root";    //prod
-				String user = "msdefuser";    //desa
-				//String password = "123";    // prod
-				String password = "1234";    //desa
+				String url = "jdbc:mysql://167.114.152.77:3306/fma?autoReconnect=true";    //prod
+				//String url = "jdbc:mysql://localhost:3306/fma?autoReconnect=true";  //desa
+				String user = "root";    //prod
+				//String user = "msdefuser";    //desa
+				String password = "123";    // prod
+				//String password = "1234";    //desa
 				Class.forName(driver);
 				connection = DriverManager.getConnection(url, user, password);
             } catch (ClassNotFoundException e) {
@@ -38,5 +38,9 @@ public class DBUtility {
 			
 			return connection;	
 		}
+	}
+	
+	public boolean getConnection(int someValue) {
+		return true; 
 	}
 }

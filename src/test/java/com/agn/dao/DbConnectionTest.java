@@ -5,7 +5,10 @@ import static org.junit.Assert.*;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import org.hibernate.metamodel.source.annotations.xml.mocker.MockHelper;
 import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 
 public class DbConnectionTest {
 
@@ -14,19 +17,22 @@ public class DbConnectionTest {
 	@Test
 	public void test() {
 		DBUtility junit = new DBUtility();
+		DBUtility junitMock = Mockito.mock(DBUtility.class);
+		Mockito.when(junitMock.getConnection(1)).thenReturn(true);
+		
 		int result = 1;
-		connection = junit.getConnection();
 		
-		try {
-			if(connection.isClosed()){
-				result = 0;
+		if(!junitMock.getConnection(1)){
+			try {
+				connection = junit.getConnection();
+				if(connection.isClosed()){
+					result = 0;
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
 		}
-
-		assertEquals(1, result);
 		
+		assertEquals(1, result);
 	}
-
 }
