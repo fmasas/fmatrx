@@ -3,10 +3,23 @@ App.controller('OrderController', ['$scope', '$location', 'OrderService', functi
           var self = this;
           self.order={id_order:null,clientname:'',order_date:'',deliver_date:'',order_total_value:'',order_status:''};
           self.orders=[];
-          self.cliente = ["Manuel Garcia", "Roberto Gomez", "Villapinzon", "Hector Segura", "Boyaca", "Alfonso Camargo", "Oswaldo Pava", "Nelson Vargas"];
+          self.people=[];
+          self.cliente = ["Manuel Garcia", "Roberto Gomez", "Villapinzon", "Hector Segura", "Boyaca", "Alfonso Camargo", "Oswaldo Pava", "Nelson Vargas", "Fernando Gonzalez"];
           self.order_status = ["Sin iniciar", "En proceso", "Terminado", "Entregado"];
           self.material = ["Maleable Acero 10-20", "Manganeso", "Manganeso Duro", "Cromo"];
                
+          self.fetchPeople = function(){
+              OrderService.fetchPeople()
+                  .then(
+                               function(d) {
+                                    self.people = d.content;
+                               },
+                                function(errResponse){
+                                    console.error('Error while fetching Orders');
+                                }
+                       );
+          };
+          
           self.fetchAllOrders = function(){
               OrderService.fetchAllOrders()
                   .then(
@@ -48,8 +61,9 @@ App.controller('OrderController', ['$scope', '$location', 'OrderService', functi
                               } 
                   );
           };
- 
+          		
           self.fetchAllOrders();
+          self.fetchPeople();
  
           self.submit = function() {
               if(self.order.id_order===null){
