@@ -1,13 +1,14 @@
-var api_service = 'http://localhost:8085/FmaTransaccional2';
-//var api_service = 'http://167.114.152.77:8090/FmaTransaccional';
-var api_people = 'http://localhost:8080/people/';
+//var api_service = 'http://localhost:8085/FmaTransaccional';
+var api_service = 'http://167.114.152.77:8090/FmaTransaccional';
+//var api_client = 'http://localhost:8085/apiclient/client/';
+var api_client = 'http://167.114.152.77:8090/apiclient/client/';
 
 App.factory('OrderService', ['$http', '$q', function($http, $q){
  
     return {
            
-    	   fetchPeople: function() {
-                 return $http.get(api_people)
+    	   fetchClients: function() {
+                 return $http.get(api_client)
                     .then(
                             function(response){
                             	console.log('Mensaje de angular');

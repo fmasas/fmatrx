@@ -55,7 +55,7 @@
                           <div class="form-group col-md-12">
                               <label class="col-md-2 control-lable" for="clientname">Cliente</label>
                               <div class="col-md-7">
-                                  <select ng-model="ctrl.order.clientname" id="clientname" ng-options="x.firstName as x.firstName for x in ctrl.people" class="clientname form-control input-sm" placeholder="Ingrese el nombre del cliente" required ng-minlength="3"></select>
+                                  <select ng-model="ctrl.order.clientname" id="clientname" ng-options="x.clientName as x.clientName for x in ctrl.client" class="clientname form-control input-sm" placeholder="Ingrese el nombre del cliente" required ng-minlength="3"></select>
                                   <div class="has-error" ng-show="myForm.$dirty">
                                       <span ng-show="myForm.clientname.$error.required">Este es un campo requerido</span>
                                       <span ng-show="myForm.clientname.$error.minlength">Longitud minima requerida es 3</span>
