@@ -28,8 +28,8 @@ public class OrderManagerService {
 				Order order = new Order();
 				order.setId_order(rs.getLong("id_order"));
 				order.setClientname(rs.getString("clientname"));
-				order.setOrder_date(rs.getString("order_date"));
-				order.setDeliver_date(rs.getString("deliver_date"));
+				order.setOrder_date(rs.getTimestamp("order_date"));
+				order.setDeliver_date(rs.getTimestamp("deliver_date"));
 				order.setOrder_total_value(rs.getDouble("order_total_value"));
 				order.setOrder_status(rs.getString("order_status"));
 				orders.add(order); 
@@ -52,8 +52,8 @@ public class OrderManagerService {
 			rs.next();
 			order.setId_order(rs.getLong("id_order"));
 			order.setClientname(rs.getString("clientname"));
-			order.setOrder_date(rs.getString("order_date"));
-			order.setDeliver_date(rs.getString("deliver_date"));
+			order.setOrder_date(rs.getTimestamp("order_date"));
+			order.setDeliver_date(rs.getTimestamp("deliver_date"));
 			order.setOrder_total_value(rs.getDouble("order_total_value"));
 			order.setOrder_status(rs.getString("order_status"));			
 			
@@ -74,8 +74,8 @@ public class OrderManagerService {
 		            connection.prepareStatement("INSERT INTO ORDERS(id_order,clientname,order_date,deliver_date,order_status) VALUES (?,?,?,?,?)");
 			 preparedStatement.setLong(1, order.getId_order());
 			 preparedStatement.setString(2, order.getClientname());
-			 preparedStatement.setString(3, order.getOrder_date());
-             preparedStatement.setString(4, order.getDeliver_date());
+			 preparedStatement.setTimestamp(3, order.getOrder_date());
+             preparedStatement.setTimestamp(4, order.getDeliver_date());
              preparedStatement.setString(5, order.getOrder_status());
 			 
              preparedStatement.executeUpdate();
@@ -101,8 +101,8 @@ public class OrderManagerService {
              //preparedStatement.setDouble(7, order.getQuantity()*order.getUnity_weight());
              //preparedStatement.setDouble(8, order.getUnity_value());
              //preparedStatement.setDouble(9, order.getQuantity()*order.getUnity_value());
-             preparedStatement.setString(2, order.getOrder_date());
-             preparedStatement.setString(3, order.getDeliver_date());
+             preparedStatement.setTimestamp(2, order.getOrder_date());
+             preparedStatement.setTimestamp(3, order.getDeliver_date());
              preparedStatement.setString(4, order.getOrder_status());
              preparedStatement.executeUpdate();
              preparedStatement.close();

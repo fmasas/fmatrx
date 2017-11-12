@@ -1,6 +1,6 @@
-//var api_service = 'http://localhost:8085/FmaTransaccional';
+//var api_service = 'http://localhost:8085/FmaTransaccional2';
 var api_service = 'http://167.114.152.77:8090/FmaTransaccional';
-//var api_client = 'http://localhost:8085/apiclient/client/';
+//var api_client = 'http://localhost:8086/apiclient/client/';
 var api_client = 'http://167.114.152.77:8090/apiclient/client/';
 
 App.factory('OrderService', ['$http', '$q', function($http, $q){

@@ -1,5 +1,7 @@
 package com.agn.model;
 
+import java.sql.Timestamp;
+
 
 public class Order {
 	
@@ -7,9 +9,9 @@ public class Order {
      
     private String clientname;
     
-    private String order_date;
+    private Timestamp order_date;
     
-    private String deliver_date;
+    private Timestamp deliver_date;
     
     private double order_total_value;
     
@@ -19,7 +21,7 @@ public class Order {
     	id_order=0;
     }
     
-    public Order(long id_order, String clientname, String order_date, String deliver_date,     String product, String material_type, 
+    public Order(long id_order, String clientname, Timestamp order_date, Timestamp deliver_date, String product, String material_type, 
     		     double order_total_value, String order_status ){
         this.id_order = id_order;
         this.clientname = clientname;
@@ -47,7 +49,7 @@ public class Order {
         return clientname;
     }
 
-	public String getDeliver_date() {
+	public Timestamp getDeliver_date() {
 		return deliver_date;
 	}
 
@@ -57,7 +59,7 @@ public class Order {
 
 
 
-	public String getOrder_date() {
+	public Timestamp getOrder_date() {
 		return order_date;
 	}
 
@@ -82,7 +84,7 @@ public class Order {
 		this.clientname = clientname;
 	}
 
-	public void setDeliver_date(String deliver_date) {
+	public void setDeliver_date(Timestamp deliver_date) {
 		this.deliver_date = deliver_date;
 	}
 
@@ -90,7 +92,7 @@ public class Order {
 		this.id_order = id_order;
 	}
 
-	public void setOrder_date(String order_date) {
+	public void setOrder_date(Timestamp order_date) {
 		this.order_date = order_date;
 	}
 

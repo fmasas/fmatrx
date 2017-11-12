@@ -7,6 +7,8 @@ App.controller('OrderController', ['$scope', '$location', 'OrderService', functi
           self.cliente = ["Manuel Garcia", "Roberto Gomez", "Villapinzon", "Hector Segura", "Boyaca", "Alfonso Camargo", "Oswaldo Pava", "Nelson Vargas", "Fernando Gonzalez"];
           self.order_status = ["Sin iniciar", "En proceso", "Terminado", "Entregado"];
           self.material = ["Maleable Acero 10-20", "Manganeso", "Manganeso Duro", "Cromo"];
+          self.tmpOrderDate;
+          self.tmpDeliverDate;
                
           self.fetchClients = function(){
               OrderService.fetchClients()
@@ -66,6 +68,17 @@ App.controller('OrderController', ['$scope', '$location', 'OrderService', functi
           self.fetchClients();
  
           self.submit = function() {
+        	  var strdate = self.tmpOrderDate;
+        	  var day = strdate.substring(0,2);
+        	  var month = strdate.substring(3,5);
+        	  var year = strdate.substring(6,10);
+        	  self.order.order_date = (new Date(month+'-'+day+'-'+year)).getTime();
+        	  strdate = '';
+        	  strdate = self.tmpDeliverDate;
+        	  var day = strdate.substring(0,2);
+        	  var month = strdate.substring(3,5);
+        	  var year = strdate.substring(6,10);
+        	  self.order.deliver_date = (new Date(month+'-'+day+'-'+year)).getTime();
               if(self.order.id_order===null){
                   console.log('Saving New Order', self.order);    
                   self.createOrder(self.order);
@@ -81,9 +94,33 @@ App.controller('OrderController', ['$scope', '$location', 'OrderService', functi
               for(var i = 0; i < self.orders.length; i++){
                   if(self.orders[i].id_order === id_order) {
                      self.order = angular.copy(self.orders[i]);
+                     var todate = new Date(self.order.order_date).getDate();
+                     if(todate < 10){
+                    	 todate = '0' + todate;
+                     }
+                     var tomonth = new Date(self.order.order_date).getMonth()+1;
+                     if(tomonth < 10){
+                    	 tomonth = '0' + tomonth;
+                     }
+                     var toyear=new Date(self.order.order_date).getFullYear();
+                     self.tmpOrderDate = todate+'-'+tomonth+'-'+toyear;
+                     todate = '';
+                     tomonth = '';
+                     toyear = '';
+                     todate = new Date(self.order.deliver_date).getDate();
+                     if(todate < 10){
+                    	 todate = '0' + todate;
+                     }
+                     var tomonth = new Date(self.order.deliver_date).getMonth()+1;
+                     if(tomonth < 10){
+                    	 tomonth = '0' + tomonth;
+                     }
+                     var toyear=new Date(self.order.deliver_date).getFullYear();
+                     self.tmpDeliverDate = todate+'-'+tomonth+'-'+toyear;
                      break;
                   }
               }
+              
           };
                
           self.remove = function(id_order){
@@ -101,6 +138,8 @@ App.controller('OrderController', ['$scope', '$location', 'OrderService', functi
 
           self.reset = function(){
               self.order={id_order:null,clientname:'',order_date:'',deliver_date:'',order_total_value:'',order_status:''};
+              self.tmpOrderDate = '';
+              self.tmpDeliverDate = '';
               $scope.myForm.$setPristine(); //reset Form
           };
  

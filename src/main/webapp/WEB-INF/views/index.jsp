@@ -69,7 +69,7 @@
                           <div class="form-group col-md-12">
                               <label class="col-md-2 control-lable" for="order_date">Fecha Orden</label>
                               <div class="col-md-7">
-                                  <input type="text" ng-model="ctrl.order.order_date" data-date-format="yyyy-mm-dd" value="{{ctrl.order.order_date | date:yyyy-mm-dd}}" id="order_date" class="form-control input-sm" placeholder="Ingrese fecha de la orden (yyyy-mm-dd)"/>
+                                  <input type="text" ng-model="ctrl.tmpOrderDate" id="order_date" class="form-control input-sm" placeholder="Ingrese fecha de la orden (dd-mm-yyyy)"/>
                               </div>
                           </div>
                       </div>
@@ -78,7 +78,7 @@
                           <div class="form-group col-md-12">
                               <label class="col-md-2 control-lable" for="deliver_date">Fecha Entrega</label>
                               <div class="col-md-7">
-                                  <input type="text" ng-model="ctrl.order.deliver_date" id="deliver_date" class="form-control input-sm" placeholder="Ingrese fecha de la entrega (yyyy-mm-dd)"/>
+                                  <input type="text" ng-model="ctrl.tmpDeliverDate" id="deliver_date" class="form-control input-sm" placeholder="Ingrese fecha de la entrega (dd-mm-yyyy)"/>
                               </div>
                           </div>
                       </div>
@@ -121,8 +121,8 @@
                           <tr ng-repeat="u in ctrl.orders">
                               <td><span ng-bind="u.id_order"></span></td>
                               <td><span ng-bind="u.clientname"></span></td>
-                              <td><span ng-bind="u.order_date"></span></td>
-                              <td><span ng-bind="u.deliver_date"></span></td>
+                              <td><span ng-bind="u.order_date | date:'dd-MM-yyyy'" ></span></td>
+                              <td><span ng-bind="u.deliver_date | date:'dd-MM-yyyy'" ></span></td>
                               <td><span ng-bind="u.order_total_value"></span></td>
                               <td><span ng-bind="u.order_status"></span></td>
                               <td>
