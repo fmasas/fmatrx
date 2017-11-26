@@ -17,6 +17,12 @@ public class DBUtility {
 			return connection;
 		else {
 			try{
+
+				//Choose the driver
+				String driver = "com.mysql.jdbc.Driver";
+				String url = "";
+				String user = "";
+				String password = "";
 				
 				//Section to identify the current machine 
 				InetAddress addr;
@@ -25,20 +31,22 @@ public class DBUtility {
 					addr = InetAddress.getLocalHost();
 					hostname = addr.getHostName();
 					System.out.println("Hostname: " + hostname);
+					
+					if(hostname.equals("Pc")){
+						url = "jdbc:mysql://localhost:3306/fma?autoReconnect=true";  //desa
+						user = "msdefuser";    //desa
+						password = "1234";    //desa
+					}else{
+						url = "jdbc:mysql://167.114.152.77:3306/fma?autoReconnect=true";    //prod
+						user = "root";    //prod
+						password = "123";    // prod
+					}
 				} catch (UnknownHostException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				
-				//Choose the driver  
-				String driver = "com.mysql.jdbc.Driver";
-				String url = "jdbc:mysql://167.114.152.77:3306/fma?autoReconnect=true";    //prod
-				String user = "root";    //prod
-				String password = "123";    // prod
-				//String url = "jdbc:mysql://localhost:3306/fma?autoReconnect=true";  //desa
-				//String user = "msdefuser";    //desa
-				//String password = "1234";    //desa
-				Class.forName(driver);
+ 				Class.forName(driver);
 				connection = DriverManager.getConnection(url, user, password);
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
