@@ -1,7 +1,7 @@
-//var api_service = 'http://localhost:8085/FmaTransaccional2';
-var api_service = 'http://167.114.152.77:8090/FmaTransaccional';
-//var api_client = 'http://localhost:8086/apiclient/client/';
-var api_client = 'http://167.114.152.77:8090/apiclient/client/';
+var api_service = 'http://localhost:8085/FmaTransaccional2';
+//var api_service = 'http://167.114.152.77:8090/FmaTransaccional';
+var api_client = 'http://localhost:8086/apiclient/client/';
+//var api_client = 'http://167.114.152.77:8090/apiclient/client/';
 
 App.factory('OrderService', ['$http', '$q', function($http, $q){
  
@@ -102,6 +102,21 @@ App.factory('OrderService', ['$http', '$q', function($http, $q){
                                     return $q.reject(errResponse);
                                 }
                         );
+           },
+           
+           getReport: function(orderid) {
+        	   
+               return $http.get(api_service+'/orderreport/'+orderid,  {responseType: 'arraybuffer'})
+                       .then(
+                               function(response){
+                               	console.log('orderreport success');
+                                   return response.data;
+                               }, 
+                               function(errResponse){
+                                   console.error('Error while consuming report');
+                                   return $q.reject(errResponse);
+                               }
+                       );
            },
             
             

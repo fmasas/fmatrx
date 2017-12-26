@@ -1,8 +1,16 @@
 package com.agn.controller;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -15,10 +23,19 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
  
 
+
+
+
+
+
+
+
+
 import com.agn.model.Order;
 import com.agn.model.OrderItem;
 import com.agn.service.OrderItemService;
 import com.agn.service.OrderService;
+
   
 @RestController
 public class FmaTrxRestController {
@@ -183,14 +200,49 @@ public class FmaTrxRestController {
   
       
      
-    //------------------- Delete All Orders --------------------------------------------------------
+    //------------------- Generate report --------------------------------------------------------
       
-    @RequestMapping(value = "/order/", method = RequestMethod.DELETE)
-    public ResponseEntity<Order> deleteAllOrders() {
-        System.out.println("Deleting All Orders");
+    @RequestMapping(value = "/orderreport/{orderid}", method = RequestMethod.GET, produces = "application/pdf")
+    public ResponseEntity<InputStreamResource> getOrderReport(@PathVariable("orderid") Long orderId) throws IOException {
+        System.out.println("Generate order report " + orderId);
   
-        orderService.deleteAllOrders();
-        return new ResponseEntity<Order>(HttpStatus.NO_CONTENT);
+        Order order = orderService.findById(orderId);
+        List<OrderItem> orderitems = orderItemService.findOrderItemsById(orderId);
+        
+        Order order2 = orderService.createOrderReport(orderId, order, orderitems);
+        
+        //ClassPathResource pdfFile = new ClassPathResource("reporte.pdf");
+        //Resource pdfFile = new getResource("file:c:\\testing.txt");
+        FileSystemResource pdfFile = null; 
+        
+		InetAddress addr;
+		try {
+			String hostname = "Unknown"; 
+			addr = InetAddress.getLocalHost();
+			hostname = addr.getHostName();
+			System.out.println("Hostname: " + hostname);
+			
+			if(hostname.equals("Pc")){
+				pdfFile = new FileSystemResource("E:\\temp\\reporte.pdf");
+			}else{
+				pdfFile = new FileSystemResource("home/reporte.pdf");
+			}
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+        
+        return ResponseEntity
+        		.ok()
+        		.contentLength(pdfFile.contentLength())
+        		.contentType(
+        				MediaType.parseMediaType("application/octet-stream"))
+        		.body(new InputStreamResource(pdfFile.getInputStream()));
+        
+        
     }
+    
+    
   
 }

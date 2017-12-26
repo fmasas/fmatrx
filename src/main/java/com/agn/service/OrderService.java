@@ -3,6 +3,7 @@ package com.agn.service;
 import java.util.List;
 
 import com.agn.model.Order;
+import com.agn.model.OrderItem;
  
 public interface OrderService {
      
@@ -15,6 +16,8 @@ public interface OrderService {
     void updateOrder(long id, Order order);
      
     void deleteOrderById(long id);
+    
+    Order createOrderReport(long orderId, Order order, List<OrderItem> orderitems);
  
     List<Order> findAllOrders(); 
      

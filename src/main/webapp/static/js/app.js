@@ -1,6 +1,7 @@
  
 var App = angular.module('myApp', ['ngRoute']);
 App.config(['$routeProvider', function($routeProvider) {
+	
     $routeProvider.
     
     when('/orders', {
@@ -12,7 +13,12 @@ App.config(['$routeProvider', function($routeProvider) {
        templateUrl: 'orderDetail.htm',
        controller: 'OrderDetailController'
     }).
-    
+
+    when('/reporteordenes/:orderid', {
+        templateUrl: 'orderReport.htm',
+        controller: 'OrderReportController'
+    }).
+
     otherwise({
        redirectTo: '/orders'
     });

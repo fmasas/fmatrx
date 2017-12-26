@@ -1,15 +1,20 @@
 package com.agn.service;
 
-import java.util.ArrayList;
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.agn.dao.OrderManagerService;
 import com.agn.model.Order;
+import com.agn.model.OrderItem;
+import com.agn.reports.OrderReport;
+import com.itextpdf.text.DocumentException;
  
 @Service("orderService")
 @Transactional
@@ -28,7 +33,6 @@ public class OrderServiceImpl implements OrderService{
     public List<Order> findAllOrders() {
         return oms.getAllOrders();
     }
-    
     
     public Order findById(long id) {
        return oms.getOrderById(id);
@@ -82,6 +86,24 @@ public class OrderServiceImpl implements OrderService{
         //orders.add(new Order(counter.incrementAndGet(),"Ancelmos", "Llaves", "100"));
         //return orders;
     	return oms.getAllOrders();
+    }
+    
+    public Order createOrderReport(long orderId, Order order, List<OrderItem> orderitems){
+
+    	OrderReport orderReport = new OrderReport();
+    	
+    	try{
+    		orderReport.generateOrderReport(orderId, order, orderitems);
+    	}catch(DocumentException e){
+    		System.out.println("DocumentException " + e.getMessage());
+    	}catch(IOException e){
+    		System.out.println("IOException " + e.getMessage());
+    	}
+    	
+    	order = null; 
+    	
+    	return order;
+    	
     }
  
 }

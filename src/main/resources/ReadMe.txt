@@ -11,6 +11,9 @@ http://localhost:8080/FmaTransaccional2/ordenes
 or
 http://localhost:8085/FmaTransaccional2/ordenes
 http://localhost:8080/FmaTransaccional2/reporteordenes
+http://localhost:8085/FmaTransaccional2/ordenes#/reporteordenes/1
+report 
+localhost:8085/FmaTransaccional2/orderreport/12
 
 http://localhost:8080/manager
 
@@ -56,3 +59,6 @@ Resources
 
 https://stormpath.com/blog/tutorial-spring-boot-war-files
 
+
+
+https://www.leveluplunch.com/java/tutorials/032-return-file-from-spring-rest-webservice/

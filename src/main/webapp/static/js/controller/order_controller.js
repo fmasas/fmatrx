@@ -142,6 +142,23 @@ App.controller('OrderController', ['$scope', '$location', 'OrderService', functi
               self.tmpDeliverDate = '';
               $scope.myForm.$setPristine(); //reset Form
           };
+          
+          self.getPdf = function(id_order){
+        	  console.log('controller download pdf');
+              OrderService.getReport(id_order)
+              .then(
+                           function(data) {
+                        	   var file = new Blob([data], {type: 'application/pdf'});
+                        	   var fileURL = URL.createObjectURL(file);
+                        	   window.open(fileURL);
+                           },
+                            function(errResponse){
+                                console.error('Error while generating the repott ');
+                            }
+                   );
+          };
+          
+          
  
       }]);
 

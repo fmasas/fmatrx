@@ -2,14 +2,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
    <head>
-      <script src="<c:url value='/static/js/config/config.js' />"></script>       
       <title>Gestión de Ordenes - FMA</title>
       <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
       <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-route.min.js"></script>
+      <script src="<c:url value='/static/js/config/config.js' />"></script>
       <script src="<c:url value='/static/js/app.js' />"></script>
       <script src="<c:url value='/static/js/service/order_service.js' />"></script>
       <script src="<c:url value='/static/js/controller/order_controller.js' />"></script>
       <script src="<c:url value='/static/js/controller/orderdetail_controller.js' />"></script>
+      <script src="<c:url value='/static/js/controller/orderreport_controller.js' />"></script>
       <style>
         .clientname.ng-valid {
           background-color: lightgreen;
@@ -44,6 +45,7 @@
          
          <script type = "text/ng-template" id = "orders.htm">
            <div class="generic-container" ng-controller="OrderController as ctrl">
+
             <div class="panel panel-default">
               <div class="panel-heading"><span class="lead">FMA SAS - Area Transaccional - Registro de ordenes </span></div>
               <div class="formcontainer">
@@ -126,7 +128,9 @@
                               <td><span ng-bind="u.order_total_value"></span></td>
                               <td><span ng-bind="u.order_status"></span></td>
                               <td>
-                              <button type="button" ng-click="ctrl.edit(u.id_order)" class="btn btn-success custom-width">Editar</button>  <button type="button" ng-click="ctrl.goDetail(u.id_order)" class="btn btn-danger custom-width">Detalle</button>
+                                  <button type="button" ng-click="ctrl.edit(u.id_order)" class="btn btn-success custom-width">Editar</button>  
+                                  <button type="button" ng-click="ctrl.goDetail(u.id_order)" class="btn btn-danger custom-width">Detalle</button>
+                                  <button type="button" ng-click="ctrl.getPdf(u.id_order)" class="btn btn-warning custom-width">Imprimir</button> 
                               </td>
                           </tr>
                       </tbody>
@@ -137,7 +141,7 @@
       </script>
 
          
-         <script type = "text/ng-template" id = "orderDetail.htm">
+     <script type = "text/ng-template" id = "orderDetail.htm">
             <h2> Order Detail </h2>
             <div class="generic-container" ng-controller="OrderDetailController as odCtl">
                  <div class="panel panel-default">
@@ -266,8 +270,11 @@
          </script>
 
       
-      <script>
+      <script type = "text/ng-template" id = "orderReport.htm" src = "order_report.html">
          
+            Report
+
+            <a ng-click="getPdf()">Show PDF</a>
          			
       </script>
       

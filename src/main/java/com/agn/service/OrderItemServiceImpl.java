@@ -10,6 +10,7 @@ import com.agn.model.Order;
 import com.agn.model.OrderItem;
 
 @Service("orderItemService")
+
 @Transactional 
 public class OrderItemServiceImpl implements OrderItemService {
 
