@@ -225,7 +225,7 @@ public class FmaTrxRestController {
 			if(hostname.equals("Pc")){
 				pdfFile = new FileSystemResource("E:\\temp\\reporte.pdf");
 			}else{
-				pdfFile = new FileSystemResource("home/reporte.pdf");
+				pdfFile = new FileSystemResource("/home/reporte.pdf");
 			}
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block

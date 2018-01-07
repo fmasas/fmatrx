@@ -24,9 +24,6 @@ public class OrderReport {
 
 	public Integer generateOrderReport(Long orderId, Order order, List<OrderItem> orderitems) throws IOException, DocumentException {
     	
-    	
-		
-		
     	String dest = null;
     	//C:\Users\Usuario\workspace-smvc\FmaTransaccional\src\main\resources
     	///FmaTransaccional/src/main/resources
@@ -42,7 +39,7 @@ public class OrderReport {
 			if(hostname.equals("Pc")){
 				dest = "E:\\temp\\reporte.pdf";
 			}else{
-				dest = "home/reporte.pdf";
+				dest = "/home/reporte.pdf";
 			}
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
@@ -51,7 +48,7 @@ public class OrderReport {
 
     	File file = new File(dest);
     	
-    	System.out.println("About to generate the report");
+    	System.out.println("About to generate the report on" + dest);
     	
     	Document document = new Document();
     	PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(dest));
@@ -78,10 +75,12 @@ public class OrderReport {
     	cb.showText("Fecha de entrega: " + order.getDeliver_date());
     	cb.setTextMatrix(30,680);
     	cb.showText("Producto"); 
-    	cb.setTextMatrix(320,680);
+    	cb.setTextMatrix(290,680);
     	cb.showText("Material");
-    	cb.setTextMatrix(430,680);
+    	cb.setTextMatrix(380,680);
     	cb.showText("Cantidad");
+    	cb.setTextMatrix(460,680);
+    	cb.showText("Peso");
     	
     	int posY = 660;
     	
@@ -91,12 +90,18 @@ public class OrderReport {
     	for(OrderItem oi : orderitems){
     		cb.setTextMatrix(30,posY);
     		cb.showText(oi.getProduct());
-    		cb.setTextMatrix(320,posY);
+    		cb.setTextMatrix(290,posY);
     		cb.showText(oi.getMaterial_type());    		
-    		cb.setTextMatrix(430,posY);
+    		cb.setTextMatrix(380,posY);
     		cb.showText(String.valueOf(oi.getQuantity()));
+    		cb.setTextMatrix(460,posY);
+    		cb.showText(String.valueOf(oi.getTotal_weight()));
+    		
     		posY = posY - 20;
     	}
+    	
+    	cb.setTextMatrix(30,330);
+    	cb.showText("Entregado por: ");
     	
     	cb.endText();
     	
