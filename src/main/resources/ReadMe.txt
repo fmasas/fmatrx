@@ -10,6 +10,7 @@ Mapping ordenes
 http://localhost:8080/FmaTransaccional2/ordenes
 or
 http://localhost:8085/FmaTransaccional2/ordenes
+http://localhost:8085/FmaTransaccional2/egresos
 http://localhost:8080/FmaTransaccional2/reporteordenes
 http://localhost:8085/FmaTransaccional2/ordenes#/reporteordenes/1
 report 

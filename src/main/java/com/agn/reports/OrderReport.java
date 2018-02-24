@@ -13,6 +13,7 @@ import com.agn.model.Order;
 import com.agn.model.OrderItem;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.PageSize;
 import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfContentByte;
 import com.itextpdf.text.pdf.PdfPTable;
@@ -50,57 +51,58 @@ public class OrderReport {
     	
     	System.out.println("About to generate the report on" + dest);
     	
-    	Document document = new Document();
+    	Document document = new Document(PageSize.LETTER.rotate());
     	PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(dest));
     	
     	document.open();
+    	
     	
     	PdfContentByte cb = writer.getDirectContent();
     	
     	BaseFont bf = BaseFont.createFont(BaseFont.COURIER_BOLD, BaseFont.CP1252, BaseFont.EMBEDDED);
     	
-    	cb.setFontAndSize(bf, 12);
+    	cb.setFontAndSize(bf, 16);
     	
     	cb.beginText();
     	
-    	cb.setTextMatrix(30,800);
+    	cb.setTextMatrix(30,550);
     	cb.showText("FMA - Reporte de ordenes");
-    	cb.setTextMatrix(30,780);
+    	cb.setTextMatrix(30,530);
     	cb.showText("Orden ID: " + orderId.toString());
-    	cb.setTextMatrix(30,760);
+    	cb.setTextMatrix(30,510);
     	cb.showText("Cliente: " + order.getClientname());
-    	cb.setTextMatrix(30,740);
+    	cb.setTextMatrix(30,490);
     	cb.showText("Fecha de orden: " + order.getOrder_date());
-    	cb.setTextMatrix(30,720);
+    	cb.setTextMatrix(30,470);
     	cb.showText("Fecha de entrega: " + order.getDeliver_date());
-    	cb.setTextMatrix(30,680);
+    	cb.setTextMatrix(30,430);
     	cb.showText("Producto"); 
-    	cb.setTextMatrix(290,680);
+    	cb.setTextMatrix(400,430);
     	cb.showText("Material");
-    	cb.setTextMatrix(380,680);
+    	cb.setTextMatrix(530,430);
     	cb.showText("Cantidad");
-    	cb.setTextMatrix(460,680);
+    	cb.setTextMatrix(630,430);
     	cb.showText("Peso");
     	
-    	int posY = 660;
+    	int posY = 410;
     	
     	bf = BaseFont.createFont(BaseFont.COURIER, BaseFont.CP1252, BaseFont.EMBEDDED);
-    	cb.setFontAndSize(bf, 11);
+    	cb.setFontAndSize(bf, 16);
     	
     	for(OrderItem oi : orderitems){
     		cb.setTextMatrix(30,posY);
     		cb.showText(oi.getProduct());
-    		cb.setTextMatrix(290,posY);
+    		cb.setTextMatrix(400,posY);
     		cb.showText(oi.getMaterial_type());    		
-    		cb.setTextMatrix(380,posY);
+    		cb.setTextMatrix(530,posY);
     		cb.showText(String.valueOf(oi.getQuantity()));
-    		cb.setTextMatrix(460,posY);
+    		cb.setTextMatrix(630,posY);
     		cb.showText(String.valueOf(oi.getTotal_weight()));
     		
     		posY = posY - 20;
     	}
     	
-    	cb.setTextMatrix(30,330);
+    	cb.setTextMatrix(30,80);
     	cb.showText("Entregado por: ");
     	
     	cb.endText();
