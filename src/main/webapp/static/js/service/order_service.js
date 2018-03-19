@@ -118,9 +118,23 @@ App.factory('OrderService', ['$http', '$q', function($http, $q){
                                }
                        );
            },
+           
+           getFullReport: function(){
+        	   
+        	   return $http.get(api_service+'/detailedorders/', {responseType:'arraybuffer'})
+        	           .then(
+        	        		   function(response){
+        	        			   console.log('Report generated succesfully');
+        	        			   return response.data;
+        	        		   },
+        	        		   function(errResponse){
+        	        			   console.error('Error while generating the report');
+        	        			   return $q.reject(errResponse);
+        	        		   }
+        	           );
+           },
             
-            
-            deleteOrder: function(id_order){
+           deleteOrder: function(id_order){
                     return $http.delete(api_service+'/order/'+id_order)
                             .then(
                                     function(response){

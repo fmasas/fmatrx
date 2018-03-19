@@ -158,6 +158,25 @@ App.controller('OrderController', ['$scope', '$location', 'OrderService', functi
                    );
           };
           
+          self.getFullReport = function(){
+        	  console.log('controller download report');
+              OrderService.getFullReport()
+              .then(
+                           function(data) {
+                        	   var file = new Blob([data], {type: 'text/plain'});
+                        	   var fileURL = URL.createObjectURL(file);
+                        	   var downloadLink = angular.element('<a></a>');
+                        	   downloadLink.attr('href',fileURL);
+                        	   downloadLink.attr('target','_self');
+                        	   downloadLink.attr('download', 'detail.csv');
+                        	   downloadLink[0].click();
+                           },
+                            function(errResponse){
+                                console.error('Error while generating the repott ');
+                            }
+                   );
+          };
+          
           
  
       }]);

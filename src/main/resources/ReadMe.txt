@@ -39,7 +39,7 @@ To run http://localhost:8080/people/ service
 3. run java -jar gs-accessing-mongodb-data-rest-0.1.0.jar
 4. Check http://localhost:8080/people/
 
-
+http://167.114.152.77:8080/people/
 
 --Run mongo on vps 
 service mongod start
@@ -63,3 +63,7 @@ https://stormpath.com/blog/tutorial-spring-boot-war-files
 
 
 https://www.leveluplunch.com/java/tutorials/032-return-file-from-spring-rest-webservice/
+
+Add a new client 
+
+curl -i -X POST -H "Content-Type:application/json" -d "{ \"clientName\" : \"Fernando Villamil\" }" http://167.114.152.77:8090/apiclient/client/

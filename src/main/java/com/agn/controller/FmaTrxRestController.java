@@ -31,8 +31,12 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 
 
+
+
+import com.agn.model.DetailedOrder;
 import com.agn.model.Order;
 import com.agn.model.OrderItem;
+import com.agn.service.DetailOrderService;
 import com.agn.service.OrderItemService;
 import com.agn.service.OrderService;
 
@@ -45,6 +49,9 @@ public class FmaTrxRestController {
     
     @Autowired
     OrderItemService orderItemService;
+    
+    @Autowired
+    DetailOrderService detailOrderService;
   
      
     //-------------------Retrieve All Orders--------------------------------------------------------
@@ -242,7 +249,44 @@ public class FmaTrxRestController {
         
         
     }
+
+    //------------------- Generate txt list --------------------------------------------------------
     
+    @RequestMapping(value = "/detailedorders/", method = RequestMethod.GET, produces = "text/plain")
+    public ResponseEntity<InputStreamResource> getDetailedOrdersFile() throws IOException {
+    	
+    	List<DetailedOrder> detorder = detailOrderService.findDetailOrders();
+    	
+    	detailOrderService.createDetailedReportFile(detorder);
+    	
+    	FileSystemResource txtFile = null;
+
+		InetAddress addr;
+		try {
+			String hostname = "Unknown"; 
+			addr = InetAddress.getLocalHost();
+			hostname = addr.getHostName();
+			System.out.println("Hostname: " + hostname);
+			
+			if(hostname.equals("Pc")){
+				txtFile = new FileSystemResource("E:\\temp\\detail.txt");
+			}else{
+				txtFile = new FileSystemResource("/home/detail.txt");
+			}
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return ResponseEntity
+	        		.ok()
+	        		.contentLength(txtFile.contentLength())
+	        		.contentType(
+	        				MediaType.parseMediaType("application/octet-stream"))
+	        		.body(new InputStreamResource(txtFile.getInputStream()));
+    	
+    	
+    }
     
   
 }

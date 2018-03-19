@@ -47,6 +47,10 @@
            <div class="generic-container" ng-controller="OrderController as ctrl">
 
             <div class="panel panel-default">
+              <div class="panel-heading"><span class="lead">FMA SAS - Area Transaccional - Formulario de busqueda </span></div>
+              <div class="formcontainer">
+                    <button type="button" ng-click="ctrl.getFullReport()" class="btn btn-warning custom-width">Reporte</button>
+              </div>
               <div class="panel-heading"><span class="lead">FMA SAS - Area Transaccional - Registro de ordenes </span></div>
               <div class="formcontainer">
                   <form ng-submit="ctrl.submit()" name="myForm" class="form-horizontal">

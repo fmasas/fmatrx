@@ -2,6 +2,7 @@ package com.agn.reports;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -9,6 +10,7 @@ import java.util.List;
 
 import org.springframework.core.io.FileSystemResource;
 
+import com.agn.model.DetailedOrder;
 import com.agn.model.Order;
 import com.agn.model.OrderItem;
 import com.itextpdf.text.Document;
@@ -121,4 +123,62 @@ public class OrderReport {
     	return 1;
     }
 	
+	public void generateDetailedReportFile(List<DetailedOrder> detailedOrders){
+		
+		String dest = null;
+		System.out.println("About to create the file");
+		InetAddress addr;
+		try {
+			String hostname = "Unknown"; 
+			addr = InetAddress.getLocalHost();
+			hostname = addr.getHostName();
+			System.out.println("Hostname: " + hostname);
+			
+			if(hostname.equals("Pc")){
+				dest = "E:\\temp\\detail.txt";
+			}else{
+				dest = "/home/detail.txt";
+			}
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
+		try{
+			FileWriter fw = new FileWriter(dest,false);
+			
+			fw.write("idOrden,nombreCliente,fechaOrden,fechaEntrega,costoTotal,estadoOrden,fechaEntegaFinal,idItemOrden,producto,tipoMaterial,pesoUnitario,pesoTotal,cantidad,valorUnitario,valorTotal,estadoItem\n");
+			
+			detailedOrders.forEach(item ->{
+				try{
+					fw.write(Long.toString(item.getIdOrder())+",");					
+					fw.write(item.getClientName()+",");
+					fw.write(item.getOrderDate()+",");
+					fw.write(item.getDeliverDate()+",");
+					fw.write(item.getTotalValue()+",");
+					fw.write(item.getOrderStatus()+",");
+					fw.write(item.getFinalDeliverDate()+",");
+					fw.write(item.getIdOrderItem()+",");
+					fw.write(item.getProduct()+",");
+					fw.write(item.getMaterialType()+",");
+					fw.write(item.getUnityWeight()+",");
+					fw.write(item.getTotalWeight()+",");
+					fw.write(item.getQuantity()+",");
+					fw.write(item.getUnityValue()+",");
+					fw.write(item.getTotalValue()+",");
+					fw.write(item.getOrderItemStatus()+"\n");
+				}catch (IOException ioe){
+					// TODO Auto-generated catch block
+					ioe.printStackTrace();
+				}
+			});
+			
+			
+			fw.close();
+		} catch (IOException ioe){
+			// TODO Auto-generated catch block
+			ioe.printStackTrace();
+		}
+		
+	}
 }
