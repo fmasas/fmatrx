@@ -21,21 +21,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
- 
 
-
-
-
-
-
-
-
-
-
-
+import com.agn.model.Customer;
 import com.agn.model.DetailedOrder;
 import com.agn.model.Order;
 import com.agn.model.OrderItem;
+import com.agn.service.CustomerService;
 import com.agn.service.DetailOrderService;
 import com.agn.service.OrderItemService;
 import com.agn.service.OrderService;
@@ -52,6 +43,9 @@ public class FmaTrxRestController {
     
     @Autowired
     DetailOrderService detailOrderService;
+    
+    @Autowired
+    CustomerService customerService; 
   
      
     //-------------------Retrieve All Orders--------------------------------------------------------
@@ -288,5 +282,17 @@ public class FmaTrxRestController {
     	
     }
     
+    
+  //-------------------Retrieve All Customers----------------------------------------------------------
+    
+    @RequestMapping(value = "/customer/", method = RequestMethod.GET)
+    public ResponseEntity<List<Customer>> listAllCustomers() {
+    	System.out.println("Retrieving all customers");
+        List<Customer> customers = customerService.getAllCustomers();
+        if(customers.isEmpty()){
+            return new ResponseEntity<List<Customer>>(HttpStatus.NO_CONTENT);//You many decide to return HttpStatus.NOT_FOUND
+        }
+        return new ResponseEntity<List<Customer>>(customers, HttpStatus.OK);
+    }
   
 }

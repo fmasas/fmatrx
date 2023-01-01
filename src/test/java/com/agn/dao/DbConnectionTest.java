@@ -17,12 +17,12 @@ public class DbConnectionTest {
 	@Test
 	public void test() {
 		DBUtility junit = new DBUtility();
-		DBUtility junitMock = Mockito.mock(DBUtility.class);
-		Mockito.when(junitMock.getConnection(1)).thenReturn(true);
+		//DBUtility junitMock = Mockito.mock(DBUtility.class);
+		//Mockito.when(junitMock.getConnection(1)).thenReturn(true);
 		
 		int result = 1;
 		
-		if(!junitMock.getConnection(1)){
+		if(!junit.getConnection(1)){
 			try {
 				connection = junit.getConnection();
 				if(connection.isClosed()){

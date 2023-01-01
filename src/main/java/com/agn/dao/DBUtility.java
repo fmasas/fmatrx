@@ -37,9 +37,9 @@ public class DBUtility {
 						user = "msdefuser";    //desa
 						password = "1234";    //desa
 					}else{
-						url = "jdbc:mysql://167.114.152.77:3306/fma?autoReconnect=true";    //prod
-						user = "root";    //prod
-						password = "123";    // prod
+						url = "jdbc:mysql://vps-b05032bc.vps.ovh.ca:3306/fma?autoReconnect=true";    //prod
+						user = "fmauser";    //prod
+						password = "Fma$1234";    // prod
 					}
 				} catch (UnknownHostException e) {
 					// TODO Auto-generated catch block

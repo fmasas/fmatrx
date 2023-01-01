@@ -3,14 +3,23 @@ App.controller('OrderController', ['$scope', '$location', 'OrderService', functi
           var self = this;
           self.order={id_order:null,clientname:'',order_date:'',deliver_date:'',order_total_value:'',order_status:''};
           self.orders=[];
-          self.client=[];
-          self.cliente = ["Manuel Garcia", "Roberto Gomez", "Villapinzon", "Hector Segura", "Boyaca", "Alfonso Camargo", "Oswaldo Pava", "Nelson Vargas", "Fernando Gonzalez"];
+          //self.client=[];
+          self.client = ["Manuel Garcia", "Roberto Gomez", "Villapinzon", "Hector Segura", "Boyaca", "Alfonso Camargo", 
+        	  "Oswaldo Pava", "Nelson Vargas", "Fernando Gonzalez", "Arcillas dorado", "Dimacut", "Industrias anda", 
+        	  "Industrias renacer", "Inversiones lyar", "Ladrillera gresqui", "Ladrillera San Jose", "Ladrillera San Sebastian p1",
+        	  "Ladrillera San Sebastian p2", "Ladrillera Tikal", "German Londono", "Gredil Gres", "Luis Murillo"];
+          self.clientname = ["Manuel Garcia", "Roberto Gomez", "Villapinzon", "Hector Segura", "Boyaca", "Alfonso Camargo", 
+        	  "Oswaldo Pava", "Nelson Vargas", "Fernando Gonzalez", "Arcillas dorado", "Dimacut", "Industrias anda", 
+        	  "Industrias renacer", "Inversiones lyar", "Ladrillera gresqui", "Ladrillera San Jose", "Ladrillera San Sebastian p1",
+        	  "Ladrillera San Sebastian p2", "Ladrillera Tikal", "German Londono", "Gredil Gres", "Luis Murillo"];
+          self.client.sort();
+          self.clientname.sort();
           self.order_status = ["Sin iniciar", "En proceso", "Terminado", "Entregado"];
           self.material = ["Maleable Acero 10-20", "Manganeso", "Manganeso Duro", "Cromo"];
           self.tmpOrderDate;
           self.tmpDeliverDate;
                
-          self.fetchClients = function(){
+          /*self.fetchClients = function(){
               OrderService.fetchClients()
                   .then(
                                function(d) {
@@ -20,7 +29,7 @@ App.controller('OrderController', ['$scope', '$location', 'OrderService', functi
                                     console.error('Error while fetching Orders');
                                 }
                        );
-          };
+          };*/
           
           self.fetchAllOrders = function(){
               OrderService.fetchAllOrders()
@@ -65,7 +74,7 @@ App.controller('OrderController', ['$scope', '$location', 'OrderService', functi
           };
           		
           self.fetchAllOrders();
-          self.fetchClients();
+          //self.fetchClients();
  
           self.submit = function() {
         	  var strdate = self.tmpOrderDate;
